@@ -5,9 +5,9 @@
   box-sizing: border-box;
 }
 :root {
-  --primary: #1a73e8;
-  --primary-light: #e8f0fe;
-  --primary-dark: #0d47a1;
+  --primary: #ff0000;
+  --primary-light: #e4e4e4;
+  --primary-dark: #ff0000;
   --surface: #fff;
   --bg: #f8f9fa;
   --text: #202124;
@@ -398,5 +398,5 @@ h4 {
   --text: #fff;
   --text-secondary: #bbb;
   --border: #333;
-  --primary-light: #2a3f6e;
+  --primary-light: #414141;
 }
