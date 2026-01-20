@@ -110,7 +110,7 @@ h4 {
   background: var(--bg);
   font-size: 1rem;
   transition: all 0.2s var(--transition);
-  color: #f8f9fa;
+  color: var(--text);
 }
 .search-box input:focus {
   outline: none;
