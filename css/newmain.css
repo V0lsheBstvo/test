@@ -78,7 +78,7 @@ h4 {
 .header-left {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
+  gap: var(--spacing);
   flex-wrap: wrap;
   min-width: 0;
 }
