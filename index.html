@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brick Wars Wiki</title>
+    <link rel="stylesheet" href="css/newmain.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-container">
+                <div class="header-left">
+                    <h1 class="logo">
+                        <i class="fas fa-book"></i> Brick Wars Wiki
+                    </h1>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Поиск карточек...">
+                        <button id="searchBtn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <div class="theme-switcher">
+                    <button id="themeToggle" aria-label="Настройки темы">
+                        <i class="fa fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="categories">
+        <div class="container">
+            <div class="categories-list" id="categoriesList">
+                <!-- Категории загрузятся через JS -->
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="cards-grid" id="cardsGrid">
+                <!-- Карточки загрузятся через JS -->
+            </div>
+        </div>
+    </main>
+
+    <div class="modal" id="cardModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" src="" alt="">
+                <div class="card-info">
+                    <p id="modalDescription" class="description"></p>
+                    <div id="modalContent" class="content"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <div class="container">
+            <p>© 2026 Brick Wars. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
