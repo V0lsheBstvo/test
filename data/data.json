@@ -1,5 +1,10 @@
 {
-  "categories": [{ "id": 1, "name": "Персонажи" }],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Сепаратисты"
+    }
+  ],
   "cards": [
     {
       "id": 1,
@@ -90,6 +95,105 @@
       "image": "data/image/Orra-Sing.png",
       "description": "Храбрый защитник королевства, обученный воинскому искусству.",
       "content": "<h3>Характеристики</h3><ul><li>Сила: 90/100</li><li>Ловкость: 70/100</li><li>Интеллект: 60/100</li></ul><h3>История</h3><p>Рыцари служат королю и защищают слабых. Они проходят многолетнее обучение и дают клятву верности.</p>"
+    },
+    {
+      "id": 11,
+      "categoryId": 1,
+      "title": "Спидер Гривуса",
+      "thumbnail": "data/image/Grievous_Speeder.png",
+      "image": "data/image/Grievous_Speeder.png",
+      "description": "потом",
+      "content": "потом"
+    },
+    {
+      "id": 12,
+      "categoryId": 1,
+      "title": "Дроид Стервятник",
+      "thumbnail": "data/image/Droid_Vulture.png",
+      "image": "data/image/Droid_Vulture.png",
+      "description": "Дроид Стервятник",
+      "content": "Дроид Стервятник"
+    },
+    {
+      "id": 13,
+      "categoryId": 1,
+      "title": "ПАУК-ДРОИД DSD1",
+      "thumbnail": "data/image/Droid_DSD1.png",
+      "image": "data/image/Droid_DSD1.png",
+      "description": "ПАУК-ДРОИД DSD1",
+      "content": "ПАУК-ДРОИД DSD1"
+    },
+    {
+      "id": 14,
+      "categoryId": 1,
+      "title": "ДРОИД-ПАУК OG-9",
+      "thumbnail": "data/image/Droid-Spider_OG-9.png",
+      "image": "data/image/Droid-Spider_OG-9.png",
+      "description": "ДРОИД-ПАУК OG-9",
+      "content": "ДРОИД-ПАУК OG-9"
+    },
+    {
+      "id": 15,
+      "categoryId": 1,
+      "title": "ТАКТИЧЕСКИЙ ДРОИД",
+      "thumbnail": "data/image/Droid_Tactic.png",
+      "image": "data/image/Droid_Tactic.png",
+      "description": "ТАКТИЧЕСКИЙ ДРОИД",
+      "content": "ТАКТИЧЕСКИЙ ДРОИД"
+    },
+    {
+      "id": 16,
+      "categoryId": 1,
+      "title": "ДРОИД-КОММАНДОС",
+      "thumbnail": "data/image/Droid_Comandos.png",
+      "image": "data/image/Droid_Comandos.png",
+      "description": "ДРОИД-КОММАНДОС",
+      "content": "ДРОИД-КОММАНДОС"
+    },
+    {
+      "id": 17,
+      "categoryId": 1,
+      "title": "СУПЕРДРОИД",
+      "thumbnail": "data/image/Droid_B2.png",
+      "image": "data/image/Droid_B2.png",
+      "description": "СУПЕРДРОИД",
+      "content": "СУПЕРДРОИД"
+    },
+    {
+      "id": 18,
+      "categoryId": 1,
+      "title": "СУПЕРДРОИД-ДЕСАНТНИК",
+      "thumbnail": "data/image/Droid_B2_rocket.png",
+      "image": "data/image/Droid_B2_rocket.png",
+      "description": "СУПЕРДРОИД-ДЕСАНТНИК",
+      "content": "СУПЕРДРОИД-ДЕСАНТНИК"
+    },
+    {
+      "id": 19,
+      "categoryId": 1,
+      "title": "ОТРЯД ДРОИДОВ",
+      "thumbnail": "data/image/Droid_B1.png",
+      "image": "data/image/Droid_B1.png",
+      "description": "ОТРЯД ДРОИДОВ",
+      "content": "ОТРЯД ДРОИДОВ"
+    },
+    {
+      "id": 20,
+      "categoryId": 1,
+      "title": "ДЖАНГО ФЕТТ",
+      "thumbnail": "data/image/Jango-Fett.png",
+      "image": "data/image/Jango-Fett.png",
+      "description": "ДЖАНГО ФЕТТ",
+      "content": "ДЖАНГО ФЕТТ"
+    },
+    {
+      "id": 21,
+      "categoryId": 1,
+      "title": "ДРОИДЕКА",
+      "thumbnail": "data/image/Droideka.png",
+      "image": "data/image/Droideka.png",
+      "description": "ДРОИДЕКА",
+      "content": "ДРОИДЕКА"
     }
   ]
 }
