@@ -30,13 +30,91 @@ function truncateText(text, maxLength = 100) {
   return text.substring(0, maxLength) + "...";
 }
 
+function getImagePath(imageName) {
+  if (!imageName || imageName.trim() === "") {
+    return "data/image/placeholder.png";
+  }
+
+  const trimmedName = imageName.trim();
+
+  // Проверяем, является ли путь уже полным (URL или data URI)
+  if (
+    trimmedName.startsWith("http://") ||
+    trimmedName.startsWith("https://") ||
+    trimmedName.startsWith("data:")
+  ) {
+    return trimmedName;
+  }
+
+  // Если это просто имя файла, добавляем путь к папке
+  if (!trimmedName.includes("/")) {
+    return `data/image/${trimmedName}`;
+  }
+
+  return trimmedName;
+}
+
 function handleImageError(img) {
-  img.src = "https://placehold.co/280x180/2d3748/ffffff?text=No+Image";
-  img.onerror = null;
+  // Если ошибка при загрузке локального изображения
+  if (img.src.includes("data/image/")) {
+    // Если это не placeholder, пытаемся загрузить placeholder
+    if (!img.src.endsWith("placeholder.png")) {
+      img.src = "data/image/placeholder.png";
+      img.onerror = () => {
+        // Если placeholder тоже не загрузился, показываем текстовый плейсхолдер
+        showTextPlaceholder(img);
+      };
+    } else {
+      // Если уже placeholder не загрузился
+      showTextPlaceholder(img);
+    }
+  } else {
+    // Для внешних ссылок пробуем локальный placeholder
+    img.src = "data/image/placeholder.png";
+    img.onerror = () => showTextPlaceholder(img);
+  }
+}
+
+function showTextPlaceholder(img) {
+  const placeholder = document.createElement("div");
+  placeholder.className = "image-placeholder";
+  placeholder.textContent = "No Image";
+  placeholder.style.cssText = `
+    width: 100%;
+    height: 100%;
+    background: #2d3748;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 4px;
+  `;
+
+  // Заменяем изображение на placeholder
+  if (img.parentNode) {
+    img.parentNode.replaceChild(placeholder, img);
+  }
+}
+
+// Проверяем расширение файла
+function isValidImageExtension(filename) {
+  if (!filename) return false;
+
+  const validExtensions = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".svg"];
+  const lowerFilename = filename.toLowerCase();
+
+  return validExtensions.some((ext) => lowerFilename.endsWith(ext));
 }
 
 // Инициализация
 document.addEventListener("DOMContentLoaded", () => {
+  // Восстанавливаем тему из localStorage
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-theme");
+  }
+
   loadData();
   setupEventListeners();
 });
@@ -57,27 +135,27 @@ async function loadData() {
   } catch (error) {
     console.error("Ошибка загрузки данных:", error);
     cardsGrid.innerHTML = `
-            <div class="error-message">
-                <h3>Ошибка загрузки данных</h3>
-                <p>Проверьте:</p>
-                <ul>
-                    <li>Файл data/data.json существует</li>
-                    <li>Запущен локальный сервер (python -m http.server)</li>
-                    <li>JSON файл имеет правильный формат</li>
-                </ul>
-                <p><small>${error.message}</small></p>
-            </div>
-        `;
+      <div class="error-message">
+        <h3>Ошибка загрузки данных</h3>
+        <p>Проверьте:</p>
+        <ul>
+          <li>Файл data/data.json существует</li>
+          <li>Запущен локальный сервер (python -m http.server)</li>
+          <li>JSON файл имеет правильный формат</li>
+        </ul>
+        <p><small>${error.message}</small></p>
+      </div>
+    `;
   }
 }
 
 function showLoading() {
   cardsGrid.innerHTML = `
-        <div class="loading">
-            <div class="loading-spinner"></div>
-            <p>Загрузка данных...</p>
-        </div>
-    `;
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <p>Загрузка данных...</p>
+    </div>
+  `;
 }
 
 // Рендер категорий
@@ -110,43 +188,68 @@ function renderCards(cardsToRender) {
 
   if (cardsToRender.length === 0) {
     cardsGrid.innerHTML = `
-            <div class="no-results">
-                <p>Карточки не найдены</p>
-                <p><small>Попробуйте изменить поисковый запрос или выбрать другую категорию</small></p>
-            </div>
-        `;
+      <div class="no-results">
+        <p>Карточки не найдены</p>
+        <p><small>Попробуйте изменить поисковый запрос или выбрать другую категорию</small></p>
+      </div>
+    `;
     return;
   }
 
   cardsToRender.forEach((card) => {
     const category = categories.find((c) => c.id === card.categoryId);
-    // Новый код (два изображения):
-    const thumbnailUrl =
-      card.thumbnail && card.thumbnail.trim()
-        ? card.thumbnail
-        : card.image && card.image.trim()
-        ? card.image
-        : "https://placehold.co/280x180/2d3748/ffffff?text=No+Image";
+
+    // Получаем путь к thumbnail изображению
+    let thumbnailPath = "data/image/placeholder.png";
+    if (card.thumbnail && card.thumbnail.trim()) {
+      thumbnailPath = getImagePath(card.thumbnail);
+    } else if (card.image && card.image.trim()) {
+      thumbnailPath = getImagePath(card.image);
+    }
+
+    // Получаем путь к полному изображению для модального окна
+    const fullImagePath =
+      card.image && card.image.trim()
+        ? getImagePath(card.image)
+        : thumbnailPath;
 
     const cardElement = document.createElement("div");
     cardElement.className = "card elevation-1";
     cardElement.innerHTML = `
-    <div class="card-image-container">
-        <img src="${escapeHtml(thumbnailUrl)}"
-             alt="${escapeHtml(card.title)}"
+      <div class="card-image-container">
+        <img src="${escapeHtml(thumbnailPath)}"
+             alt="${escapeHtml(card.title || "Без названия")}"
              class="card-image"
-             loading="lazy">
-    </div>
-    <div class="card-content">
-        <h3 class="card-title" title="${escapeHtml(card.title)}">
-            ${escapeHtml(truncateText(card.title, 60))}
+             loading="lazy"
+             data-full-image="${escapeHtml(fullImagePath)}">
+      </div>
+      <div class="card-content">
+        <h3 class="card-title" title="${escapeHtml(card.title || "")}">
+          ${escapeHtml(truncateText(card.title || "Без названия", 60))}
         </h3>
-    </div>
-`;
+        ${
+          category
+            ? `<p class="card-category">${escapeHtml(category.name)}</p>`
+            : ""
+        }
+        ${
+          card.description
+            ? `<p class="card-description">${escapeHtml(
+                truncateText(card.description, 80)
+              )}</p>`
+            : ""
+        }
+      </div>
+    `;
 
     // Обработчик ошибок изображения
     const img = cardElement.querySelector(".card-image");
-    img.onerror = () => handleImageError(img);
+    if (!isValidImageExtension(thumbnailPath)) {
+      // Если расширение невалидное, сразу показываем placeholder
+      handleImageError(img);
+    } else {
+      img.onerror = () => handleImageError(img);
+    }
 
     cardElement.addEventListener("click", () => openCardModal(card));
     cardsGrid.appendChild(cardElement);
@@ -218,15 +321,44 @@ function openCardModal(card) {
     modalTitle.appendChild(categorySpan);
   }
 
-  modalImage.src =
-    card.image ||
-    card.thumbnail ||
-    "https://placehold.co/800x400/2d3748/ffffff?text=No+Image";
-  modalImage.alt = card.title || "";
+  // Получаем путь к изображению для модального окна
+  let modalImagePath = "data/image/placeholder.png";
+  if (card.image && card.image.trim()) {
+    modalImagePath = getImagePath(card.image);
+  } else if (card.thumbnail && card.thumbnail.trim()) {
+    modalImagePath = getImagePath(card.thumbnail);
+  }
+
+  modalImage.src = modalImagePath;
+  modalImage.alt = card.title || "Изображение карточки";
   modalImage.onerror = () => {
-    modalImage.src =
-      "https://placehold.co/800x400/2d3748/ffffff?text=Image+Error";
+    // При ошибке пробуем placeholder
+    if (!modalImage.src.includes("placeholder.png")) {
+      modalImage.src = "data/image/placeholder.png";
+      modalImage.onerror = () => {
+        modalImage.style.display = "none";
+        const placeholder = document.createElement("div");
+        placeholder.className = "modal-image-placeholder";
+        placeholder.textContent = "Изображение не загружено";
+        placeholder.style.cssText = `
+          width: 100%;
+          height: 300px;
+          background: #2d3748;
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 16px;
+          border-radius: 8px;
+          margin: 10px 0;
+        `;
+        modalImage.parentNode.insertBefore(placeholder, modalImage.nextSibling);
+      };
+    } else {
+      modalImage.style.display = "none";
+    }
   };
+  modalImage.style.display = "block";
 
   modalDescription.textContent = card.description || "Нет описания";
   modalDescription.title = card.description || "";
@@ -237,10 +369,20 @@ function openCardModal(card) {
     tempDiv.innerHTML = card.content;
 
     // Очищаем от потенциально опасных тегов
-    const scripts = tempDiv.querySelectorAll(
-      "script, style, link, meta, object, embed, applet, frame, iframe"
-    );
-    scripts.forEach((el) => el.remove());
+    const dangerousTags = [
+      "script",
+      "style",
+      "link",
+      "meta",
+      "object",
+      "embed",
+      "applet",
+      "frame",
+      "iframe",
+    ];
+    dangerousTags.forEach((tag) => {
+      tempDiv.querySelectorAll(tag).forEach((el) => el.remove());
+    });
 
     // Добавляем базовые стили для контента
     tempDiv.classList.add("modal-content-text");
@@ -272,7 +414,10 @@ function performSearch() {
       (card) =>
         (card.title && card.title.toLowerCase().includes(query)) ||
         (card.description && card.description.toLowerCase().includes(query)) ||
-        (card.content && card.content.toLowerCase().includes(query))
+        (card.content && card.content.toLowerCase().includes(query)) ||
+        (card.tags &&
+          Array.isArray(card.tags) &&
+          card.tags.some((tag) => tag.toLowerCase().includes(query)))
     );
   }
 
@@ -338,6 +483,5 @@ function toggleTheme() {
   );
 }
 
-document.getElementById('themeToggle').addEventListener('click', function() {
-toggleTheme()
-});
+// Инициализация темы
+document.getElementById("themeToggle").addEventListener("click", toggleTheme);
