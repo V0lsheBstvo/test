@@ -401,3 +401,156 @@ h4 {
   --border: #333;
   --primary-light: #414141;
 }
+
+/* Улучшенное модальное окно для мобильных устройств */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 1300;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch; /* Плавная прокрутка на iOS */
+  padding: 20px 10px;
+}
+
+.modal-content {
+  background: var(--surface);
+  margin: 20px auto;
+  width: 100%;
+  max-width: 95%;
+  max-height: 90vh;
+  border-radius: var(--radius);
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14),
+    0 9px 46px 8px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 1;
+}
+
+.modal-body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.modal-image-container {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+#modalImage {
+  max-width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+  margin: 0 auto;
+}
+
+.modal-description,
+.modal-content-text {
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.modal-description {
+  margin-bottom: 12px;
+  overflow-wrap: break-word;
+}
+
+.modal-content-text {
+  overflow-wrap: break-word;
+}
+
+/* Адаптивные улучшения для мобильных устройств */
+@media (max-width: 750px) {
+  .modal-content {
+    margin: 10px auto;
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    padding: 12px 16px;
+  }
+
+  .modal-body {
+    padding: 12px 16px;
+    max-height: 75vh;
+  }
+
+  .close-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+  }
+
+  #modalTitle {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    margin: 5px;
+    border-radius: 12px;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 12px 14px;
+  }
+
+  .close-btn {
+    align-self: flex-end;
+    margin-top: -8px;
+  }
+
+  #modalImage {
+    max-height: 250px;
+  }
+
+  .modal-description,
+  .modal-content-text {
+    font-size: 0.95rem;
+  }
+
+  .modal-body {
+    padding: 12px 14px;
+  }
+}
+
+/* Улучшенная прокрутка для iOS */
+.modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
