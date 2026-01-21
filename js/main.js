@@ -24,6 +24,26 @@ function escapeHtml(text) {
   return div.innerHTML;
 }
 
+// Обновление иконки темы
+function updateThemeIcon() {
+  const themeToggleIcon = document.querySelector("#themeToggle i");
+  if (document.body.classList.contains("dark-theme")) {
+    // В темной теме показываем солнце
+    themeToggleIcon.classList.remove("fa-moon");
+    themeToggleIcon.classList.add("fa-sun");
+    document
+      .getElementById("themeToggle")
+      .setAttribute("aria-label", "Переключить на светлую тему");
+  } else {
+    // В светлой теме показываем луну
+    themeToggleIcon.classList.remove("fa-sun");
+    themeToggleIcon.classList.add("fa-moon");
+    document
+      .getElementById("themeToggle")
+      .setAttribute("aria-label", "Переключить на темную тему");
+  }
+}
+
 function truncateText(text, maxLength = 100) {
   if (!text) return "";
   if (text.length <= maxLength) return text;
@@ -114,6 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (savedTheme === "dark") {
     document.body.classList.add("dark-theme");
   }
+
+  updateThemeIcon(); // Устанавливаем правильную иконку при загрузке
 
   loadData();
   setupEventListeners();
@@ -481,6 +503,7 @@ function toggleTheme() {
     "theme",
     document.body.classList.contains("dark-theme") ? "dark" : "light"
   );
+  updateThemeIcon(); // Добавляем вызов функции обновления иконки
 }
 
 // Инициализация темы
