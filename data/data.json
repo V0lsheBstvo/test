@@ -355,7 +355,7 @@
     {
       "id": 39,
       "categoryId": 2,
-      "title": "КЛОН-ПУЛЕМЁТЧИК",
+      "title": "КЛОН-ПУЛЕМЁТЧИК 104",
       "thumbnail": "data/image/104_heavy-clone.png",
       "image": "data/image/104_heavy-clone.png",
       "description": "15 очков | Здоровье: 2 | Броня: 3+D6 | Движение: 6 | Дальний бой: 4+D6 | Ближний бой: D6",
@@ -364,7 +364,7 @@
     {
       "id": 40,
       "categoryId": 2,
-      "title": "Реактивный Клон",
+      "title": "Реактивный Клон 104",
       "thumbnail": "data/image/104_jet-clone.png",
       "image": "data/image/104_jet-clone.png",
       "description": "15 очков за модель | Здоровье: 2 | Броня: 3+D6 | Движение: 14 | Дальний бой: 4+D6 | Ближний бой: D6",
@@ -373,7 +373,7 @@
     {
       "id": 41,
       "categoryId": 2,
-      "title": "Клон Коммандос",
+      "title": "Клон Коммандос 104",
       "thumbnail": "data/image/104_Comandos_clone.png",
       "image": "data/image/104_Comandos_clone.png",
       "description": "20 очков за модель | Здоровье: 2 | Броня: 4+D6 | Движение: 8 | Ближний бой: D6",
@@ -382,7 +382,7 @@
     {
       "id": 42,
       "categoryId": 2,
-      "title": "КЛОН-ДЕСАНТНИК",
+      "title": "КЛОН-ДЕСАНТНИК 212",
       "thumbnail": "data/image/AirBorn_Trooper_212.png",
       "image": "data/image/AirBorn_Trooper_212.png",
       "description": "8 очков за модель | Здоровье: 1 | Броня: 2+D6 | Движение: 8 | Дальний бой: 4+D6 | Ближний бой: D6",
@@ -391,7 +391,7 @@
     {
       "id": 43,
       "categoryId": 2,
-      "title": "КЛОН-СЕРЖАНТ",
+      "title": "КЛОН-СЕРЖАНТ 104",
       "thumbnail": "data/image/104_sergeant-clone.png",
       "image": "data/image/104_sergeant-clone.png",
       "description": "7 очков за модель | Здоровье: 1 | Броня: 2+D6 | Движение: 8 | Дальний бой: 4+D6 | Ближний бой: D6",
@@ -400,7 +400,7 @@
     {
       "id": 44,
       "categoryId": 2,
-      "title": "КЛОН-ПИЛОТ ШАГОХОДА",
+      "title": "КЛОН-ПИЛОТ ШАГОХОДА 104",
       "thumbnail": "data/image/104_AT-RT-driver-clone.png",
       "image": "data/image/104_AT-RT-driver-clone.png",
       "description": "5 очков за модель | Здоровье: 1 | Броня: 2+D6 | Движение: 8 | Дальний бой: 4+D6 | Ближний бой: D6",
@@ -409,7 +409,7 @@
     {
       "id": 45,
       "categoryId": 2,
-      "title": "КЛОН-КАПИТАН",
+      "title": "КЛОН-КАПИТАН 104",
       "thumbnail": "data/image/104_Captain_clone.png",
       "image": "data/image/104_Captain_clone.png",
       "description": "25 очков | Здоровье: 2 | Броня: 3+D6 | Движение: 8 | Дальний бой: 2+D6 (2х) | Ближний бой: D6",
@@ -418,7 +418,7 @@
     {
       "id": 46,
       "categoryId": 2,
-      "title": "КЛОН-КОМАНДЕР",
+      "title": "КЛОН-КОМАНДЕР 104",
       "thumbnail": "data/image/104_Comander_clone.png",
       "image": "data/image/104_Comander_clone.png",
       "description": "30 очков | Здоровье: 3 | Броня: 4+D6 | Движение: 8 | Дальний бой: 2+D6 (2х) | Ближний бой: D6",
