@@ -396,18 +396,6 @@ function openCardModal(card) {
   cardModal.style.display = "flex";
   document.body.style.overflow = "hidden";
   cardModal.focus();
-
-  // Добавляем обработчик для мобильных устройств
-  setTimeout(() => {
-    // Скроллим к началу модального окна
-    const modalBody = document.querySelector(".modal-body");
-    if (modalBody) {
-      modalBody.scrollTop = 0;
-    }
-  }, 100);
-
-  cardModal.style.display = "flex";
-  document.body.style.overflow = "hidden";
 }
 
 // Поиск
